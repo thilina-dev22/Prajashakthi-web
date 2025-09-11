@@ -47,137 +47,141 @@ const GetInvolved = () => {
   return (
     <div>
       <Header />
-      <div>
-        <style>
-          {`
+      <style>
+        {`
+          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+          body {
+            font-family: 'Inter', sans-serif;
+          }
           @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(20px); }
-              to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
           }
           .animate-fade-in {
-              animation: fadeIn 0.8s ease-out;
+            animation: fadeIn 0.8s ease-out;
           }
           .required-label::after {
-              content: '*';
-              color: #ef4444; /* red-500 */
-              margin-left: 0.25rem;
+            content: '*';
+            color: #ef4444; /* red-500 */
+            margin-left: 0.25rem;
           }
-          `}
-        </style>
-        
-        {/* Hero Section */}
-        <section className="relative pt-40 pb-20 text-center text-white bg-cover bg-center" style={{ backgroundImage: "url('/getinvolved_hero_img.png')" }}>
-          <div className="absolute inset-0 bg-black/40"></div>
-          <div className="relative container mx-auto px-4">
-            <h1 className="text-5xl md:text-6xl font-extrabold">Get Involved</h1>
-            <p className="mt-4 text-lg">
-              Home / <span className="font-semibold">Get Involved</span>
-            </p>
-          </div>
-        </section>
+        `}
+      </style>
+      
+      {/* Hero Section */}
+      <section  className="relative pt-40 pb-20 text-center text-white bg-cover bg-center" style={{ backgroundImage: "url('/getinvolved_hero_img.png')" }}>
+        <div className="absolute inset-0 bg-black/40"></div>
+        <div className="relative container mx-auto px-4">
+          <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-lg">Get Involved</h1>
+          <p className="mt-4 text-lg drop-shadow-md">
+            Home / <span className="font-semibold">Get Involved</span>
+          </p>
+        </div>
+      </section>
 
-        <div className="flex justify-center items-center bg-gray-50 p-4">
-          <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-3xl animate-fade-in my-8">
-            <h2 className="text-3xl font-bold text-center text-[#932E40]">Share Your Ideas</h2>
-            <p className="mt-2 text-center text-gray-600">
-              Fill out the form below to support the Prajahitha's Movement with your ideas and help uplift communities.
-            </p>
+      <main className="flex justify-center items-center py-12 px-4">
+        <div className="bg-white shadow-2xl rounded-3xl p-8 md:p-12 w-full max-w-4xl animate-fade-in">
+          <h2 className="text-3xl font-bold text-center text-[#932E40]">Share Your Ideas</h2>
+          <p className="mt-2 text-center text-gray-600">
+            Fill out the form below to support the Prajahitha's Movement with your ideas and help uplift communities.
+          </p>
 
-            {isSubmitted ? (
-              <div className="mt-8 text-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md relative" role="alert">
-                <strong className="font-bold">Success!</strong>
-                <span className="block sm:inline ml-2">Your application has been submitted. Thank you for sharing your ideas!</span>
+          {isSubmitted ? (
+            <div className="mt-8 text-center bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-md animate-fade-in" role="alert">
+              <strong className="font-bold">Success!</strong>
+              <span className="block sm:inline ml-2">Your application has been submitted. Thank you for sharing your ideas!</span>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {/* Full Name */}
+              <div className="col-span-1 sm:col-span-2">
+                <label htmlFor="fullName" className={`${labelStyle} required-label`}>Full Name</label>
+                <input
+                  type="text"
+                  name="fullName"
+                  id="fullName"
+                  placeholder="Enter your full name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  className={inputStyle}
+                  required
+                />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {/* Full Name */}
-                <div className="col-span-2">
-                  <label htmlFor="fullName" className={`${labelStyle} required-label`}>Full Name</label>
-                  <input
-                    type="text"
-                    name="fullName"
-                    id="fullName"
-                    placeholder="Enter your full name"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className={inputStyle}
-                    required
-                  />
-                </div>
 
-                {/* NIC Number and Date of Birth */}
-                <div>
-                  <label htmlFor="nicNumber" className={`${labelStyle} required-label`}>NIC Number</label>
-                  <input
-                    type="text"
-                    name="nicNumber"
-                    id="nicNumber"
-                    placeholder="Enter your NIC number (e.g., 123456789V)"
-                    value={formData.nicNumber}
-                    onChange={handleChange}
-                    className={inputStyle}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="dateOfBirth" className={`${labelStyle} required-label`}>Date of Birth</label>
-                  <input
-                    type="date"
-                    name="dateOfBirth"
-                    id="dateOfBirth"
-                    value={formData.dateOfBirth}
-                    onChange={handleChange}
-                    className={inputStyle}
-                    required
-                  />
-                </div>
+              {/* NIC Number and Date of Birth */}
+              <div>
+                <label htmlFor="nicNumber" className={`${labelStyle} required-label`}>NIC Number</label>
+                <input
+                  type="text"
+                  name="nicNumber"
+                  id="nicNumber"
+                  placeholder="Enter your NIC number"
+                  value={formData.nicNumber}
+                  onChange={handleChange}
+                  className={inputStyle}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="dateOfBirth" className={`${labelStyle} required-label`}>Date of Birth</label>
+                <input
+                  type="date"
+                  name="dateOfBirth"
+                  id="dateOfBirth"
+                  value={formData.dateOfBirth}
+                  onChange={handleChange}
+                  className={inputStyle}
+                  required
+                />
+              </div>
 
-                {/* Gender */}
-                <div className="col-span-2">
-                  <label className={`${labelStyle} required-label`}>Gender</label>
-                  <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mt-2">
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Male"
-                        checked={formData.gender === 'Male'}
-                        onChange={handleChange}
-                        className="form-radio text-[#932E40] h-4 w-4"
-                        required
-                      />
-                      <span className="ml-2 text-gray-700">Male</span>
-                    </label>
-                    <label className="inline-flex items-center">
-                      <input
-                        type="radio"
-                        name="gender"
-                        value="Female"
-                        checked={formData.gender === 'Female'}
-                        onChange={handleChange}
-                        className="form-radio text-[#932E40] h-4 w-4"
-                        required
-                      />
-                      <span className="ml-2 text-gray-700">Female</span>
-                    </label>
-                  </div>
+              {/* Gender */}
+              <div className="col-span-1 sm:col-span-2">
+                <label className={`${labelStyle} required-label`}>Gender</label>
+                <div className="flex flex-wrap space-x-4 mt-2">
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Male"
+                      checked={formData.gender === 'Male'}
+                      onChange={handleChange}
+                      className="form-radio text-[#932E40] h-5 w-5 rounded-full"
+                      required
+                    />
+                    <span className="ml-2 text-gray-700">Male</span>
+                  </label>
+                  <label className="inline-flex items-center">
+                    <input
+                      type="radio"
+                      name="gender"
+                      value="Female"
+                      checked={formData.gender === 'Female'}
+                      onChange={handleChange}
+                      className="form-radio text-[#932E40] h-5 w-5 rounded-full"
+                      required
+                    />
+                    <span className="ml-2 text-gray-700">Female</span>
+                  </label>
                 </div>
+              </div>
 
-                {/* Address */}
-                <div className="col-span-2">
-                  <label htmlFor="address" className={`${labelStyle} required-label`}>Address</label>
-                  <textarea
-                    name="address"
-                    id="address"
-                    placeholder="Enter your complete address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className={`${inputStyle} h-24 resize-none`}
-                    required
-                  />
-                </div>
+              {/* Address */}
+              <div className="col-span-1 sm:col-span-2">
+                <label htmlFor="address" className={`${labelStyle} required-label`}>Address</label>
+                <textarea
+                  name="address"
+                  id="address"
+                  placeholder="Enter your complete address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  className={`${inputStyle} h-24 resize-none`}
+                  required
+                />
+              </div>
 
-                {/* District, DS Division, GN Division */}
+              {/* District, DS Division, GN Division - Now responsive with a 3-column layout on larger screens */}
+              <div className="col-span-1 sm:col-span-2 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                   <label htmlFor="district" className={`${labelStyle} required-label`}>District</label>
                   <select
@@ -223,79 +227,79 @@ const GetInvolved = () => {
                     <option value="gn2">GN 2</option>
                   </select>
                 </div>
+              </div>
 
-                {/* Phone Number and Email */}
-                <div>
-                  <label htmlFor="phoneNumber" className={`${labelStyle} required-label`}>Phone Number</label>
-                  <input
-                    type="tel"
-                    name="phoneNumber"
-                    id="phoneNumber"
-                    placeholder="Enter your phone number"
-                    value={formData.phoneNumber}
-                    onChange={handleChange}
-                    className={inputStyle}
-                    required
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className={labelStyle}>Email (Optional)</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    placeholder="Enter your email address"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={inputStyle}
-                  />
-                </div>
+              {/* Phone Number and Email */}
+              <div>
+                <label htmlFor="phoneNumber" className={`${labelStyle} required-label`}>Phone Number</label>
+                <input
+                  type="tel"
+                  name="phoneNumber"
+                  id="phoneNumber"
+                  placeholder="Enter your phone number"
+                  value={formData.phoneNumber}
+                  onChange={handleChange}
+                  className={inputStyle}
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className={labelStyle}>Email (Optional)</label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Enter your email address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={inputStyle}
+                />
+              </div>
 
-                {/* Choose Your Area of Focus */}
-                <div className="col-span-2">
-                  <label htmlFor="focusArea" className={`${labelStyle} required-label`}>Choose Your Area of Focus</label>
-                  <select
-                    name="focusArea"
-                    id="focusArea"
-                    value={formData.focusArea}
-                    onChange={handleChange}
-                    className={inputStyle}
-                    required
-                  >
-                    <option value="" disabled>Select your areas of focus</option>
-                    <option value="area1">Area 1</option>
-                    <option value="area2">Area 2</option>
-                  </select>
-                </div>
+              {/* Choose Your Area of Focus */}
+              <div className="col-span-1 sm:col-span-2">
+                <label htmlFor="focusArea" className={`${labelStyle} required-label`}>Choose Your Area of Focus</label>
+                <select
+                  name="focusArea"
+                  id="focusArea"
+                  value={formData.focusArea}
+                  onChange={handleChange}
+                  className={inputStyle}
+                  required
+                >
+                  <option value="" disabled>Select your areas of focus</option>
+                  <option value="area1">Area 1</option>
+                  <option value="area2">Area 2</option>
+                </select>
+              </div>
 
-                {/* Share Your Suggestion */}
-                <div className="col-span-2">
-                  <label htmlFor="suggestion" className={`${labelStyle} required-label`}>Share Your Suggestion</label>
-                  <textarea
-                    name="suggestion"
-                    id="suggestion"
-                    placeholder="Describe your areas of focus and ideas"
-                    value={formData.suggestion}
-                    onChange={handleChange}
-                    className={`${inputStyle} h-32 resize-none`}
-                    required
-                  />
-                </div>
+              {/* Share Your Suggestion */}
+              <div className="col-span-1 sm:col-span-2">
+                <label htmlFor="suggestion" className={`${labelStyle} required-label`}>Share Your Suggestion</label>
+                <textarea
+                  name="suggestion"
+                  id="suggestion"
+                  placeholder="Describe your areas of focus and ideas"
+                  value={formData.suggestion}
+                  onChange={handleChange}
+                  className={`${inputStyle} h-32 resize-none`}
+                  required
+                />
+              </div>
 
-                {/* Submit Button */}
-                <div className="col-span-2 flex justify-center mt-4">
-                  <button
-                    type="submit"
-                    className="px-8 py-3 bg-[#932E40] text-white font-bold rounded-lg shadow-lg hover:bg-[#7f2837] hover:scale-105 transition-all duration-300"
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
+              {/* Submit Button */}
+              <div className="col-span-1 sm:col-span-2 flex justify-center mt-4">
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto px-8 py-3 bg-[#932E40] text-white font-bold rounded-lg shadow-lg hover:bg-[#7f2837] hover:scale-105 transition-all duration-300"
+                >
+                  Submit Application
+                </button>
+              </div>
+            </form>
+          )}
         </div>
-      </div>
+      </main>
       <Footer />
     </div>
   );
